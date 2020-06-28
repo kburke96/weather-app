@@ -66,15 +66,17 @@
           <input type="submit" class="ghost-button" value="Get Weather">
         </form>
         <div class="report">
-        <% if(weather !== null){ %>
-          <p><%= weather %></p>
-          <p><%= weatherTomorrow %></p>
-        <% } %>
+          
+          <% if(weather !== null){ %>
+            <img class="weather-img" src= <%= weathericoncode %> >
+            <p><%= weather %></p>
+            <p><%= weatherTomorrow %></p>
+          <% } %>
 
 
-        <% if(error !== null){ %>
-          <p><%= error %></p>
-        <% } %>
+          <% if(error !== null){ %>
+            <p><%= error %></p>
+          <% } %>
         </div>
       </fieldset>
     </div>
