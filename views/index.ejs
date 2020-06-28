@@ -68,8 +68,10 @@
         <div class="report">
           
           <% if(weather !== null){ %>
-            <img class="weather-img" src= <%= weathericoncode %> >
+            <img class="weather-img" src= <%= weatherTodayIconUrl %> >
             <p><%= weather %></p>
+            <hr/>
+            <img class="weather-img" src= <%= weatherTomorrowIconUrl %> >
             <p><%= weatherTomorrow %></p>
           <% } %>
 
