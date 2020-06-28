@@ -10,7 +10,7 @@ const googleApiKey = 'AIzaSyB-3hW5ZIn9ErVs27FdQBRFXQ6CTe0QJ_Y';
 const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 let d = new Date();
 let n = d.getDay();
-let dayAfter = daysOfWeek[n + 2]
+let dayAfter = daysOfWeek[n + 2];
 var lat, lon, locationName;
 
 app.use(express.static('public'));
