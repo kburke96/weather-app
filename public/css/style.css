@@ -40,6 +40,19 @@ h4 {
   padding-top: 40px;
 }
 
+.footer {
+  text-align: right;
+  margin-left: auto;
+  margin-right: 0px;
+  width: auto;
+}
+
+.footer-table {
+  margin-left: auto;
+  margin-right: 0px;
+  width: auto;
+}
+
 fieldset {
   display: block;
   -webkit-margin-start: 0px;
