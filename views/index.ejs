@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Test</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
+  </head>
+  <body>
+    <div class="navcontainer">
+      <nav class="navbar navbar-expand-sm navbar-dark bg-primary justify-content-center align-items-start">
+        <a class="navbar-brand position-absolute" href="#">weather-app</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto justify-content-center">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+
+    <h4>Enter a location to get a weather update!</h4>
+
+    <div class="container">
+      <fieldset>
+        <form action="/" method="post">
+          <table>
+            <tr>
+              <td>
+                <input name="city" type="text" class="ghost-input" placeholder="Enter a City" required>
+              </td>
+            </tr>
+          </table>
+          
+          <input type="submit" class="ghost-button" value="Get Weather">
+        </form>
+        <div class="report">
+        <% if(weather !== null){ %>
+          <p><%= weather %></p>
+          <p><%= weatherTomorrow %></p>
+        <% } %>
+
+
+        <% if(error !== null){ %>
+          <p><%= error %></p>
+        <% } %>
+        </div>
+      </fieldset>
+    </div>
+  </body>
+</html>
