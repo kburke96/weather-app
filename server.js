@@ -18,7 +18,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.set('view engine', 'ejs')
 
 app.get('/', function (req, res) {
-  res.render('index', {weather: null, error: null});
+  res.render('index', {weather: null, dayAfter: dayAfter, error: null});
 })
 
 app.post('/', function (req, res) {
@@ -29,7 +29,7 @@ app.post('/', function (req, res) {
 
   request(locationurl, function(err, response, body) {
     if(err){
-      res.render('index', {weather: null, error: 'Error, please try again'});
+      res.render('index', {weather: null, dayAfter: dayAfter, error: 'Error, please try again'});
     } else {
       console.log("using google api..");
       let location = JSON.parse(body);
@@ -49,7 +49,7 @@ app.post('/', function (req, res) {
       } else {
         let weather = JSON.parse(body);
         if(weather.timezone == undefined){
-          res.render('index', {weather: null, error: 'Error, please try again'});
+          res.render('index', {weather: null, dayAfter: dayAfter, error: 'Error, please try again'});
         } else {
           let currentTempK = weather.current.temp;
           let currentTempC = currentTempK - 273.15;
@@ -61,7 +61,7 @@ app.post('/', function (req, res) {
           
           let weatherText = `It's ${currentTempC} degrees with ${weather.current.weather[0].description} in ${locationName}!`;
           let weatherTomorrowText = `Tomorrow will be ${tomorrowTempC} with ${weather.daily[1].weather[0].description}`;
-          res.render('index', {weather: weatherText, weatherTomorrow: weatherTomorrowText, error: null});
+          res.render('index', {weather: weatherText, weatherTomorrow: weatherTomorrowText, dayAfter: dayAfter, error: null});
         }
       }
     });

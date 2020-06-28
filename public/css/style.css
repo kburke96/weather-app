@@ -4,7 +4,7 @@
 */
 
 body {
-  width: 60%;
+  width: 80%;
   margin: auto;
   position: relative;
   font-family: 'Open Sans', sans-serif;
@@ -18,8 +18,22 @@ body {
 h4 {
   padding-top: 40px;
   text-align: center;
-  color: rgb(51, 48, 48);
+  color: rgb(71, 68, 68);
 
+}
+
+.selectday {
+  background-color: transparent;
+  border:2px solid #ddd;
+  padding-top:40px;
+  padding:10px 30px;
+  width: 100%;
+  min-width: 50px;
+  -webkit-transition: all 0.1s ease-in-out;
+  -moz-transition: all 0.1s ease-in-out;
+  -ms-transition: all 0.1s ease-in-out;
+  -o-transition: all 0.1s ease-in-out;
+  transition: all 0.1s ease-in-out;
 }
 
 .report {
