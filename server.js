@@ -28,43 +28,49 @@ app.post('/', function (req, res) {
   let locationurl = `https://maps.googleapis.com/maps/api/geocode/json?components=administrative_area:${city}&key=${googleApiKey}`;
 
   request(locationurl, function(err, response, body) {
-    if(err){
+    let location = JSON.parse(body);
+    if(location.status !== "OK") {
       res.render('index', {weather: null, weathericoncode: null, dayAfter: dayAfter, error: 'Error, please try again'});
     } else {
-      //console.log("using google api..");
-      let location = JSON.parse(body);
-      lat = location.results[0].geometry.location.lat;
-      lon = location.results[0].geometry.location.lng;
-      locationName = location.results[0].address_components[0].long_name;
-      //console.log("lat is: " + lat);
-      //console.log("lon is: " + lon);
-    }
-
-    let weatherurl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly&appid=${owmApiKey}`;
-
-    request(weatherurl, function (err, response, body) {
-      //console.log("Weather request. Lat is " + lat + " and lon is " + lon);
       if(err){
         res.render('index', {weather: null, weathericoncode: null, dayAfter: dayAfter, error: 'Error, please try again'});
       } else {
-        let weather = JSON.parse(body);
-        if(weather.timezone == undefined){
+        //console.log("using google api..");
+        
+        lat = location.results[0].geometry.location.lat;
+        lon = location.results[0].geometry.location.lng;
+        locationName = location.results[0].address_components[0].long_name;
+        //console.log("lat is: " + lat);
+        //console.log("lon is: " + lon);
+      }
+  
+      let weatherurl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly&appid=${owmApiKey}`;
+  
+      request(weatherurl, function (err, response, body) {
+        //console.log("Weather request. Lat is " + lat + " and lon is " + lon);
+        if(err){
           res.render('index', {weather: null, weathericoncode: null, dayAfter: dayAfter, error: 'Error, please try again'});
         } else {
-          let currentTempC = (weather.current.temp - 273.15).toPrecision(3);
-          let tomorrowTempC = (weather.daily[1].temp.day - 273.15).toPrecision(3);
-
-          let weatherTodayIconUrl = `http://openweathermap.org/img/wn/${weather.current.weather[0].icon}@2x.png`;
-          let weatherTomorrowIconUrl = `http://openweathermap.org/img/wn/${weather.daily[1].weather[0].icon}@2x.png`;
-
-          //console.log("Passing the following url: " + weathericonurl);
-          
-          let weatherText = `It's ${currentTempC} degrees with ${weather.current.weather[0].description} in ${locationName}!`;
-          let weatherTomorrowText = `Tomorrow will be ${tomorrowTempC} degrees with ${weather.daily[1].weather[0].description}`;
-          res.render('index', {dayAfter: dayAfter, weatherTodayIconUrl: weatherTodayIconUrl, weatherTomorrowIconUrl: weatherTomorrowIconUrl, weather: weatherText, weatherTomorrow: weatherTomorrowText,  error: null});
+          let weather = JSON.parse(body);
+          if(weather.timezone == undefined){
+            res.render('index', {weather: null, weathericoncode: null, dayAfter: dayAfter, error: 'Error, please try again'});
+          } else {
+            let currentTempC = (weather.current.temp - 273.15).toPrecision(3);
+            let tomorrowTempC = (weather.daily[1].temp.day - 273.15).toPrecision(3);
+  
+            let weatherTodayIconUrl = `http://openweathermap.org/img/wn/${weather.current.weather[0].icon}@2x.png`;
+            let weatherTomorrowIconUrl = `http://openweathermap.org/img/wn/${weather.daily[1].weather[0].icon}@2x.png`;
+  
+            //console.log("Passing the following url: " + weathericonurl);
+            
+            let weatherText = `It's ${currentTempC} degrees with ${weather.current.weather[0].description} in ${locationName}!`;
+            let weatherTomorrowText = `Tomorrow will be ${tomorrowTempC} degrees with ${weather.daily[1].weather[0].description}`;
+            res.render('index', {dayAfter: dayAfter, weatherTodayIconUrl: weatherTodayIconUrl, weatherTomorrowIconUrl: weatherTomorrowIconUrl, weather: weatherText, weatherTomorrow: weatherTomorrowText,  error: null});
+          }
         }
-      }
-    });
+      });
+    }
+    
   })
 
   
