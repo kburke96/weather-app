@@ -51,19 +51,11 @@ app.post('/', function (req, res) {
         if(weather.timezone == undefined){
           res.render('index', {weather: null, weathericoncode: null, dayAfter: dayAfter, error: 'Error, please try again'});
         } else {
-          let currentTempK = weather.current.temp;
-          let currentTempC = currentTempK - 273.15;
-          currentTempC = currentTempC.toPrecision(3);
+          let currentTempC = (weather.current.temp - 273.15).toPrecision(3);
+          let tomorrowTempC = (weather.daily[1].temp.day - 273.15).toPrecision(3);
 
-          let tomorrowTempK = weather.daily[1].temp.day;
-          let tomorrowTempC = tomorrowTempK - 273.15;
-          tomorrowTempC = tomorrowTempC.toPrecision(3);
-
-          let weatherTodayIconCode = weather.current.weather[0].icon;
-          let weatherTodayIconUrl = `http://openweathermap.org/img/wn/${weatherTodayIconCode}@2x.png`;
-
-          let weatherTomorrowIconCode = weather.daily[1].weather[0].icon;
-          let weatherTomorrowIconUrl = `http://openweathermap.org/img/wn/${weatherTomorrowIconCode}@2x.png`;
+          let weatherTodayIconUrl = `http://openweathermap.org/img/wn/${weather.current.weather[0].icon}@2x.png`;
+          let weatherTomorrowIconUrl = `http://openweathermap.org/img/wn/${weather.daily[1].weather[0].icon}@2x.png`;
 
           //console.log("Passing the following url: " + weathericonurl);
           
