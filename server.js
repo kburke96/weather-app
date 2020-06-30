@@ -1,10 +1,12 @@
+require('dotenv').config()
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const request = require('request');
 const app = express()
 
-const owmApiKey = '5badf62e6c47455b3c449f1af9635254';
-const googleApiKey = 'AIzaSyB-3hW5ZIn9ErVs27FdQBRFXQ6CTe0QJ_Y';
+const owmApiKey = process.env.owmApiKey;
+const googleApiKey = process.env.googleApiKey;
 
 //Days of week needed for drop down menu.
 const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
